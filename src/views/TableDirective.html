@@ -1,0 +1,75 @@
+<div>
+    <div class="row margin0 hidden-print">
+        <div class="col-lg-4 left padding0" ng-show="create">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <a ng-href="#/{{create}}/+" class="btn btn-success">
+                        <i class="fa fa-plus-square-o"></i> &nbsp; Добавить
+                    </a>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-lg-4 right padding0">
+            <div class="input-group">
+                <input type="text" ng-model="filtration" class="form-control">
+
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Искать</button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th ng-repeat="column in columns | filter: { hidden: false }">
+                <a ng-click="sortName(column.field)" class="clickable">{{column.name}}</a>
+
+                    <span style="display: inline-block; width: 20px;">
+                        <i ng-show="isSortedAsc(column.field)" class="fa fa-sort-asc" style="color: #999999;"></i>
+                        <i ng-show="isSortedDesc(column.field)" class="fa fa-sort-desc" style="color: #999999;"></i>
+                    </span>
+            </th>
+
+            <th class="hidden-print">&nbsp;</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-hide="(data | filter: filtration).length">
+            <td colspan="999">Данные отсутствуют</td>
+        </tr>
+
+        <tr ng-repeat="item in data | filter: filtration | orderBy: sortRule">
+            <td ng-repeat="column in columns | filter: { hidden: false }"
+                ng-init="text = (column.formatter || defaultFormatter)(item[column.field])">
+
+                <span ng-hide="item[column.href]">{{text}}</span>
+                <a ng-show="item[column.href]" ng-href="{{item[column.href]}}">text</a>
+            </td>
+
+            <td class="hidden-print">
+                <a ng-href="#/{{show}}/{{item.id}}" ng-show="show">
+                    <i class="fa fa-eye"></i> Показать
+                </a>
+
+                <a ng-href="/{{pdf}}/{{item.id}}" ng-show="pdf" target="_blank">
+                    <i class="fa fa-file-pdf-o"></i> Счёт
+                </a>
+
+                <a ng-href="#/{{edit}}/{{item.id}}" ng-show="edit">
+                    <i class="fa fa-pencil-square-o"></i> Изменить
+                </a>
+
+                <a ng-href="#/{{remove}}/{{item.id}}" ng-show="remove" class="delete">
+                    <i class="fa fa-trash-o"></i> Удалить
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>Показать {{(data | filter: filtration).length}} из {{data.length}} записей</p>
+</div>

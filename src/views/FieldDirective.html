@@ -1,0 +1,18 @@
+<div class="form-group has-feedback" ng-class="wrong ? 'has-error' : ''">
+    <label for="{{id}}" class="col-sm-2 control-label">{{label}}</label>
+
+    <div class="col-sm-5">
+        <!--suppress XmlDuplicatedId -->
+        <input id="{{id}}" name="{{name}}" ng-model="value" ng-show="{{type != 'select' && type != 'textarea'}}"
+               type="{{type}}" class="form-control" ng-disabled="disabled" ng-class=""/>
+
+        <!--suppress XmlDuplicatedId -->
+        <textarea id="{{id}}" name="{{name}}" ng-show="{{type == 'textarea' && ! disabled}}"
+                  class="form-control" ng-disabled="disabled" ng-model="value">{{value}}</textarea>
+
+        <!--suppress XmlDuplicatedId -->
+        <select id="{{id}}" name="{{name}}" class="form-control" ng-model="value" ng-show="{{type === 'select'}}" ng-disabled="disabled">
+            <option value="{{option.value || option.name || option}}" ng-repeat="option in options">{{option.name || option}}</option>
+        </select>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+{
+    "name": "JiNGle",
+    "version": "0.2.0",
+    "main": "src/js/JiNGle.js",
+
+    "authors": [
+        { "name": "Anton Iskov", "email": "aiskov@jiss-software.com" }
+    ],
+
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components"
+    ],
+
+    "dependencies": {
+        "sugar": "",
+        "angular": "~1.2.11",
+        "jquery": "~1.11.0",
+        "noty": ""
+    }
+}

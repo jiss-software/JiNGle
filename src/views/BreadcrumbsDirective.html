@@ -1,0 +1,12 @@
+<div>
+    <ol class="breadcrumb hidden-print">
+        <li class="active"><i class="fa fa-home"></i></li>
+
+        <li ng-class="{'active': $last}" ng-repeat="node in nodes">
+            <span ng-show="$last">{{node.name}}</span>
+            <a href="#{{node.path}}" ng-hide="$last">{{node.name}}</a>
+        </li>
+    </ol>
+
+    <h1 class="visible-print">{{nodes[nodes.length - 1].name}}</h1>
+</div>
