@@ -48,6 +48,12 @@ angular.module('JiNGle.interceptor').factory('HttpInterceptor', function($q) {
         },
 
         responseError: function(rejection) {
+            if (! rejection.config) {
+                noty({ text: 'System error', type: 'danger' });
+                console.log(rejection.message);
+                return
+            }
+
             if (isSystemCall(rejection.config.method, rejection.config.url)
                 || rejection.config.method.toUpperCase() == 'GET') return $q.reject(rejection);
 
