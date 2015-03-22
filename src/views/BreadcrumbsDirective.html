@@ -1,10 +1,12 @@
 <div>
     <ol class="breadcrumb hidden-print">
-        <li class="active"><i class="fa fa-home"></i></li>
+        <li class="active">
+            <i class="fa fa-home"></i>
+        </li>
 
         <li ng-class="{'active': $last}" ng-repeat="node in nodes">
-            <span ng-show="$last">{{node.name}}</span>
-            <a href="#{{node.path}}" ng-hide="$last">{{node.name}}</a>
+            <span ng-show="$last">{{node.name || (node.code | i18n)}}</span>
+            <a href="#{{node.path}}" ng-hide="$last">{{node.name || (node.code | i18n)}}</a>
         </li>
     </ol>
 
