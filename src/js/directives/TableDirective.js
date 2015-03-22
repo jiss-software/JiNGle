@@ -1,4 +1,4 @@
-angular.module('JiNGle.dirctives').directive('jitable', function($filter) {
+angular.module('JiNGle.directives').directive('jitable', function($filter) {
     'use strict';
 
     return {
