@@ -13,3 +13,7 @@ var JiNGle = {
     JiNGle.scriptPath = JiNGle.rootPath + 'js/';
     JiNGle.viewPath = JiNGle.rootPath + 'views/';
 })();
+
+angular.module('JiNGle.directives', []);
+angular.module('JiNGle.filters', []);
+angular.module('JiNGle.interceptor', []);
