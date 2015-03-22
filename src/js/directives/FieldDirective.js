@@ -23,7 +23,7 @@
  *  name - Value is name
  *  date - Value is date
  */
-angular.module('JiNGle.directives').directive('jifield', function() {
+angular.module('JiNGle.directives').directive('jifield', function($filter) {
     'use strict';
 
     return {
@@ -46,6 +46,21 @@ angular.module('JiNGle.directives').directive('jifield', function() {
         link: function($scope) {
             $scope.id = $scope.id || $scope.name || 'field_' + Math.floor((Math.random() * 10000000) + 1);
             $scope.type = $scope.type || 'text';
+
+            var translator = $filter('i18n');
+
+            $scope.printValue = function(option) {
+                if (! option) return;
+                return option.value || option.name || option.code || option
+            };
+
+            $scope.printName = function(option) {
+                if (! option) return;
+                if (option.name) return option.name;
+                if (option.code) return translator(option.code);
+
+                return option.value || option.code || option.code || option;
+            };
         }
     };
 });
