@@ -1,0 +1,162 @@
+<div>
+    <div class="row margin0 hidden-print">
+        <div class="col-lg-4 left padding0" ng-show="create">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <a ng-href="#/{{create}}/+" class="btn btn-success">
+                        <i class="fa fa-plus-square-o"></i> &nbsp; {{'default.button.create.label' | i18n}}
+                    </a>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-lg-4 right padding0">
+            <div class="input-group">
+                <input type="text" ng-model="settings.query" class="form-control">
+
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="startSearch()">{{'table.search' | i18n}}</button>
+
+                    <button class="btn btn-default" type="button" ng-click="config = !config" ng-init="config = false">
+                        <i class="fa fa-wrench"></i>
+                        <span class="caret"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row margin0 hidden-print form-horizontal" role="form"
+         ng-show="config" style="background-color: rgb(245, 245, 245); margin-top: 20px !important; padding-top: 15px; border-top: 2px solid rgb(221, 221, 221);">
+
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{'table.size' | i18n}}</label>
+
+                <div class="col-sm-5">
+                    <select class="form-control" ng-model="settings.pageSize">
+                        <option ng-repeat="sizeOptions in sizes">{{sizeOptions}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group" ng-repeat="column in columns" ng-if="false">
+                <label class="col-sm-2 control-label">{{column.name || (column.code | i18n)}}</label>
+
+                <div class="col-sm-5">
+                    <input ng-hide="collection.options[column.field]" class="form-control" type="text" size="40" />
+
+                    <select ng-show="collection.options[column.field]" class="form-control">
+                        <option> - </option>
+
+                        <option ng-repeat="option in collection.options[column.field]"
+                                value="{{option._id || option}}">
+
+                            {{cellFormat(asRow(option, column.field), column)}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button class="btn btn-default" ng-click="changeSettings()" type="button">{{'table.search' | i18n}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th ng-repeat="column in columns | filter: { hidden: false }"
+                    ng-init="tytle = column.name ? column.name : (column.code | i18n)">
+
+                    <span ng-show="! collection.meta[column.field].sortable">{{tytle}}</span>
+
+                    <a ng-click="sortName(column.field)" class="clickable"
+                       ng-show="collection.meta[column.field].sortable">
+                        {{tytle}}
+                    </a>
+
+                    <span>
+                        <i ng-show="isFiltered(column.field)" class="fa fa-filter" style="color: #999999;"></i>
+                    </span>
+
+                    <span style="display: inline-block; width: 20px;">
+                        <i ng-show="isSortedAsc(column.field)" class="fa fa-sort-asc" style="color: #999999;"></i>
+                        <i ng-show="isSortedDesc(column.field)" class="fa fa-sort-desc" style="color: #999999;"></i>
+                    </span>
+                </th>
+
+                <th class="hidden-print">&nbsp;</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-hide="collection.data.length">
+                <td colspan="999" style="text-align: center;">
+                    <span ng-show="ready">{{'default.nodata.label' | i18n}}</span>
+                    <span ng-hide="ready">{{'table.loading' | i18n}}</span>
+                </td>
+            </tr>
+
+            <tr ng-show="ready" ng-repeat="item in collection.data">
+                <td ng-repeat="column in columns | filter: { hidden: false }">
+                    <span ng-hide="item[column.href]">{{cellFormat(item, column)}}</span>
+
+                    <a ng-show="item[column.href]" ng-href="{{item[column.href]}}">
+                        {{cellFormat(item, column)}}
+                    </a>
+                </td>
+
+                <td class="hidden-print">
+                    <a ng-href="#/{{show}}/{{item._id}}" ng-show="show">
+                        <i class="fa fa-eye"></i> {{'default.show.label' | i18n}}
+                    </a>
+
+                    <a ng-href="/{{pdf}}/{{item._id}}" ng-show="pdf" target="_blank">
+                        <i class="fa fa-file-pdf-o"></i> {{'default.button.invoice.label' | i18n}}
+                    </a>
+
+                    <a ng-href="#/{{edit}}/{{item._id}}" ng-show="edit">
+                        <i class="fa fa-pencil-square-o"></i> {{'default.button.edit.label' | i18n}}
+                    </a>
+
+                    <a ng-href="#/{{remove}}/{{item._id}}" ng-show="remove" class="delete">
+                        <i class="fa fa-trash-o"></i> {{'default.button.delete.label' | i18n}}
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="row margin0 hidden-print">
+        <div class="col-lg-10 padding0">
+            <nav ng-hide="pageQuantity == 1">
+                <ul class="pagination" style="margin: 0">
+                    <li ng-class="{ disabled: page == 1 }">
+                        <a ng-click="goToPage(1)" class="clickable">&laquo;</a>
+                    </li>
+
+                    <li ng-repeat="currentPage in (pageQuantity | range: 1)" ng-class="{ active: page == currentPage }"
+                        ng-show="isVisibleSelector(currentPage)">
+
+                        <a ng-click="goToPage(currentPage)"
+                           class="clickable {{currentPage == 1 && ! isVisibleSelector(2) && 'pagination_start'}} {{currentPage == pageQuantity && !isVisibleSelector(pageQuantity - 1) && 'pagination_end'}}">
+                            {{currentPage}}
+                        </a>
+                    </li>
+
+                    <li ng-class="{ disabled: page == pageQuantity }">
+                        <a ng-click="goToPage(pageQuantity)" class="clickable">&raquo;</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="col-lg-2 right" style="padding-right: 0; text-align: right;">
+            <p>{{'table.info' | i18n: collection.selectionSize: collection.collectionSize }}</p>
+        </div>
+    </div>
+</div>
