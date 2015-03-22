@@ -11,8 +11,10 @@
                   class="form-control" ng-disabled="disabled" ng-model="value">{{value}}</textarea>
 
         <!--suppress XmlDuplicatedId -->
-        <select id="{{id}}" name="{{name}}" class="form-control" ng-model="value" ng-show="{{type === 'select'}}" ng-disabled="disabled">
-            <option value="{{option.value || option.name || option}}" ng-repeat="option in options">{{option.name || option}}</option>
+        <select id="{{id}}" name="{{name}}" class="form-control" ng-model="value"
+                ng-show="{{type === 'select'}}" ng-disabled="disabled">
+
+            <option value="{{printValue(option)}}" ng-repeat="option in options">{{printName(option)}}</option>
         </select>
     </div>
 </div>
