@@ -1,15 +1,15 @@
-JiNGle = JiNGle || {};
-
-JiNGle.rootPath = null;
-JiNGle.scriptPath = null;
-JiNGle.viewPath = null;
+var JiNGle = {
+    rootPath: null,
+    scriptPath: null,
+    viewPath: null
+};
 
 (function() {
     var scripts = document.getElementsByTagName('script');
     var currentPath = scripts[scripts.length-1].src;
 
-    this.rootPath = currentPath.substring(0, currentPath.lastIndexOf('/js/') + 1);
+    JiNGle.rootPath = currentPath.substring(0, currentPath.lastIndexOf('/js/') + 1);
 
-    this.scriptPath = this.rootPath + 'js/';
-    this.viewPath = this.rootPath + 'views/';
+    JiNGle.scriptPath = JiNGle.rootPath + 'js/';
+    JiNGle.viewPath = JiNGle.rootPath + 'views/';
 })();
