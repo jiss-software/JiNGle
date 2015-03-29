@@ -18,7 +18,7 @@ angular.module('JiNGle.directives').directive('jitable', function($filter) {
         },
 
         link: function($scope, element, attrs) {
-            $scope.defaultFormatter = $filter('inline');
+            $scope.defaultFormatter = $filter('ji_inline');
 
             // Apply sort rules from attribute
             $scope.sortRule = [ ];
