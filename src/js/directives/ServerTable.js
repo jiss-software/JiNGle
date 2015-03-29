@@ -20,15 +20,18 @@ angular.module('JiNGle.directives').directive('jiservertable', function($http) {
         link: function($scope, element, attrs) {
             var load = function() {
                 $scope.ready = false;
+                
+                var selection = {
+                    skip: $scope.collection.skip,
+                    limit: $scope.collection.limit,
 
-                var url = attrs.source
-                    + "?limit=" + $scope.collection.limit
-                    + "&skip=" + $scope.collection.skip
-                    + "&sortOrder=" + JSON.stringify($scope.collection.sortOrder)
-                    + "&filter=" + JSON.stringify($scope.collection.filter)
-                    + "&query=" + ($scope.collection.query || "");
+                    query: ($scope.collection.query || ""),
+    
+                    filter: $scope.collection.filter
+                    order: $scope.collection.sortOrder,
+                }
 
-                $http.get(url).success(function(data) {
+                $http.put(attrs.source, selection).success(function(data) {
                     $scope.collection = data;
 
                     $scope.page = Math.ceil((data.skip || 0) / data.limit) + 1;
