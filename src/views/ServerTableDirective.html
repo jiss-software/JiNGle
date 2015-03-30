@@ -4,7 +4,7 @@
             <div class="input-group">
                 <span class="input-group-btn">
                     <a ng-href="#/{{create}}/+" class="btn btn-success">
-                        <i class="fa fa-plus-square-o"></i> &nbsp; {{'default.button.create.label' | i18n}}
+                        <i class="fa fa-plus-square-o"></i> &nbsp; {{'action.create' | i18n}}
                     </a>
                 </span>
             </div>
@@ -15,7 +15,7 @@
                 <input type="text" ng-model="settings.query" class="form-control">
 
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" ng-click="startSearch()">{{'table.search' | i18n}}</button>
+                    <button class="btn btn-default" type="button" ng-click="startSearch()">{{'action.find' | i18n}}</button>
 
                     <button class="btn btn-default" type="button" ng-click="config = !config" ng-init="config = false">
                         <i class="fa fa-wrench"></i>
@@ -31,7 +31,7 @@
 
         <form class="form-horizontal" role="form">
             <div class="form-group">
-                <label class="col-sm-2 control-label">{{'table.size' | i18n}}</label>
+                <label class="col-sm-2 control-label">{{'label.page_size' | i18n}}</label>
 
                 <div class="col-sm-5">
                     <select class="form-control" ng-model="settings.pageSize">
@@ -60,7 +60,7 @@
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button class="btn btn-default" ng-click="changeSettings()" type="button">{{'table.search' | i18n}}</button>
+                    <button class="btn btn-default" ng-click="changeSettings()" type="button">{{'action.find' | i18n}}</button>
                 </div>
             </div>
         </form>
@@ -96,8 +96,8 @@
         <tbody>
             <tr ng-hide="collection.data.length">
                 <td colspan="999" style="text-align: center;">
-                    <span ng-show="ready">{{'default.nodata.label' | i18n}}</span>
-                    <span ng-hide="ready">{{'table.loading' | i18n}}</span>
+                    <span ng-show="ready">{{'label.no_data' | i18n}}</span>
+                    <span ng-hide="ready">{{'label.loading' | i18n}}</span>
                 </td>
             </tr>
 
@@ -112,19 +112,19 @@
 
                 <td class="hidden-print">
                     <a ng-href="#/{{show}}/{{item._id}}" ng-show="show">
-                        <i class="fa fa-eye"></i> {{'default.show.label' | i18n}}
+                        <i class="fa fa-eye"></i> {{'action.show' | i18n}}
                     </a>
 
                     <a ng-href="/{{pdf}}/{{item._id}}" ng-show="pdf" target="_blank">
-                        <i class="fa fa-file-pdf-o"></i> {{'default.button.invoice.label' | i18n}}
+                        <i class="fa fa-file-pdf-o"></i> {{'action.print' | i18n}}
                     </a>
 
                     <a ng-href="#/{{edit}}/{{item._id}}" ng-show="edit">
-                        <i class="fa fa-pencil-square-o"></i> {{'default.button.edit.label' | i18n}}
+                        <i class="fa fa-pencil-square-o"></i> {{'action.edit' | i18n}}
                     </a>
 
                     <a ng-href="#/{{remove}}/{{item._id}}" ng-show="remove" class="delete">
-                        <i class="fa fa-trash-o"></i> {{'default.button.delete.label' | i18n}}
+                        <i class="fa fa-trash-o"></i> {{'action.delete' | i18n}}
                     </a>
                 </td>
             </tr>
@@ -156,7 +156,7 @@
         </div>
 
         <div class="col-lg-2 right" style="padding-right: 0; text-align: right;">
-            <p>{{'table.info' | i18n: collection.selectionSize: collection.collectionSize }}</p>
+            <p>{{'label.table_info' | i18n: collection.selectionSize: collection.collectionSize }}</p>
         </div>
     </div>
 </div>
