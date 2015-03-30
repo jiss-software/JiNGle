@@ -27,9 +27,9 @@ angular.module('JiNGle.directives').directive('jiservertable', function($http) {
 
                     query: ($scope.collection.query || ""),
     
-                    filter: $scope.collection.filter
-                    order: $scope.collection.sortOrder,
-                }
+                    filter: $scope.collection.filter,
+                    order: $scope.collection.sortOrder
+                };
 
                 $http.put(attrs.source, selection).success(function(data) {
                     $scope.collection = data;
