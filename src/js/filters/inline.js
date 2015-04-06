@@ -4,7 +4,7 @@ angular.module('JiNGle.filters').filter('ji_inline', function() {
     return function(input, maxLength, side) {
         if (typeof input !== 'string') return input;
 
-        var short = input.words().join('');
+        var short = input.words().join(' ');
         if (! maxLength || short.length <= maxLength) return short;
 
         return short.truncateOnWord(maxLength - 3, side);
