@@ -4,9 +4,9 @@
             <i class="fa fa-home"></i>
         </li>
 
-        <li ng-class="{'active': $last}" ng-repeat="node in nodes">
-            <span ng-show="$last">{{node.name || (node.code | i18n)}}</span>
-            <a href="#{{node.path}}" ng-hide="$last">{{node.name || (node.code | i18n)}}</a>
+        <li ng-class="{'active': ! isActive(node)}" ng-repeat="node in nodes">
+            <span ng-hide="isActive(node)">{{node.name || (node.code | i18n)}}</span>
+            <a href="#{{node.path}}" ng-show="isActive(node)">{{node.name || (node.code | i18n)}}</a>
         </li>
     </ol>
 
