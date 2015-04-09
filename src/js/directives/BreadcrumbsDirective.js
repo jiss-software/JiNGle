@@ -8,6 +8,12 @@ angular.module('JiNGle.directives').directive('jibreadcrumbs', function() {
 
         scope: {
             nodes: '=nodes'
+        },
+        
+        link: function($scope) {
+            $scope.isActive = function(node) {
+                return typeof node.active !== "undefined" && node.active || node === $scope.nodes[$scope.nodes - 1]
+            };    
         }
     };
 });
