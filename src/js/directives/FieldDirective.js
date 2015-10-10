@@ -39,6 +39,7 @@ angular.module('JiNGle.directives').directive('jifield', function($filter) {
             value: '=',
             wrong: '=',
             options: '=',
+            configure: '=',
             disabled: '=',
             validation: '='
         },
@@ -60,6 +61,15 @@ angular.module('JiNGle.directives').directive('jifield', function($filter) {
                 if (option.code) return translator(option.code);
 
                 return option.value || option.code || option.code || option;
+            };
+
+            $scope.fieldLength = $scope.type == 'html' ? 8 : 5;
+
+            $scope.configure = $scope.configure || {
+                inline: false,
+                plugins : 'advlist autolink link image lists charmap print preview',
+                skin: 'lightgray',
+                theme : 'modern'
             };
         }
     };

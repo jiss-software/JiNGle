@@ -1,18 +1,18 @@
 <div class="form-group has-feedback" ng-class="wrong ? 'has-error' : ''">
     <label for="{{id}}" class="col-sm-2 control-label">{{label}}</label>
 
-    <div class="col-sm-5">
-        <!--suppress XmlDuplicatedId -->
-        <input id="{{id}}" name="{{name}}" ng-model="value" ng-show="{{type != 'select' && type != 'textarea'}}"
+    <div class="col-sm-{{fieldLength}}">
+        <input id="{{id}}" name="{{name}}" ng-model="value" ng-if="{{type != 'select' && type != 'textarea'}}"
                type="{{type}}" class="form-control" ng-disabled="disabled" ng-class=""/>
 
-        <!--suppress XmlDuplicatedId -->
-        <textarea id="{{id}}" name="{{name}}" ng-show="{{type == 'textarea' && ! disabled}}"
+        <textarea id="{{id}}" name="{{name}}" ng-if="{{type == 'textarea' && ! disabled}}"
                   class="form-control" ng-disabled="disabled" ng-model="value">{{value}}</textarea>
 
-        <!--suppress XmlDuplicatedId -->
+        <textarea id="{{id}}" name="{{name}}" ng-if="{{type == 'html' && ! disabled}}" ui-tinymce="configure"
+                  class="form-control" ng-disabled="disabled" ng-model="value">{{value}}</textarea>
+
         <select id="{{id}}" name="{{name}}" class="form-control" ng-model="value"
-                ng-show="{{type === 'select'}}" ng-disabled="disabled">
+                ng-if="{{type === 'select'}}" ng-disabled="disabled">
 
             <option value="{{printValue(option)}}" ng-repeat="option in options">{{printName(option)}}</option>
         </select>
