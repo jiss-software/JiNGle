@@ -4,6 +4,10 @@ var JiNGle = {
     viewPath: null
 };
 
+angular.module('JiNGle.directives', ['ui.tinymce']);
+angular.module('JiNGle.filters', []);
+angular.module('JiNGle.interceptor', []);
+
 (function() {
     var scripts = document.getElementsByTagName('script');
     var currentPath = scripts[scripts.length-1].src;
@@ -13,10 +17,6 @@ var JiNGle = {
     JiNGle.scriptPath = JiNGle.rootPath + 'js/';
     JiNGle.viewPath = JiNGle.rootPath + 'views/';
 })();
-
-angular.module('JiNGle.directives', []);
-angular.module('JiNGle.filters', []);
-angular.module('JiNGle.interceptor', []);
 ;window.notyData = {
     loadingQty: 0,
     loading: null
@@ -156,12 +156,12 @@ angular.module('JiNGle.directives').directive('jifield', function($filter) {
             name: '@',
             label: '@',
             type: '@',
-            value: '=',
-            wrong: '=',
-            options: '=',
-            configure: '=',
-            disabled: '=',
-            validation: '='
+            value: '=?',
+            wrong: '=?',
+            options: '=?',
+            configure: '=?',
+            disabled: '=?',
+            validation: '=?'
         },
 
         link: function($scope) {
@@ -183,18 +183,18 @@ angular.module('JiNGle.directives').directive('jifield', function($filter) {
                 return option.value || option.code || option.code || option;
             };
 
-            $scope.fieldLength = $scope.type == 'html' ? 8 : 5;
+            $scope.type = ['select', 'textarea', 'html'].indexOf($scope.type) == -1 ? 'text' : $scope.type;
+            $scope.fieldLength = ['textarea', 'html'].indexOf($scope.type) == -1 ? 8 : 5;
 
             $scope.configure = $scope.configure || {
                 inline: false,
-                plugins : 'advlist autolink link image lists charmap print preview',
+                plugins : 'advlist autolink link lists charmap print preview',
                 skin: 'lightgray',
                 theme : 'modern'
             };
         }
     };
-});
-;/**
+});;/**
  * Attributes:
  *  id - [Optional] identifier of item (can be generated randomly)
  *  disabled - [Optional] is input field disabled
