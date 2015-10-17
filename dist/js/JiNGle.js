@@ -1,22 +1,24 @@
-var JiNGle = {
-    rootPath: null,
-    scriptPath: null,
-    viewPath: null
-};
+var JiNGle = (function() {
+    var conf = {
+        rootPath: '',
+        scriptPath: '',
+        viewPath: ''
+    };
 
-angular.module('JiNGle.directives', ['ui.tinymce']);
-angular.module('JiNGle.filters', []);
-angular.module('JiNGle.interceptor', []);
-
-(function() {
     var scripts = document.getElementsByTagName('script');
     var currentPath = scripts[scripts.length-1].src;
 
-    JiNGle.rootPath = currentPath.substring(0, currentPath.lastIndexOf('/js/') + 1);
+    conf.rootPath = currentPath.substring(0, currentPath.lastIndexOf('/js/') + 1);
 
-    JiNGle.scriptPath = JiNGle.rootPath + 'js/';
-    JiNGle.viewPath = JiNGle.rootPath + 'views/';
+    conf.scriptPath = conf.rootPath + 'js/';
+    conf.viewPath = conf.rootPath + 'views/';
+
+    return conf;
 })();
+
+angular.module('JiNGle.directives', []);
+angular.module('JiNGle.filters', []);
+angular.module('JiNGle.interceptor', []);
 ;window.notyData = {
     loadingQty: 0,
     loading: null
@@ -150,6 +152,7 @@ angular.module('JiNGle.directives').directive('jifield', function($filter) {
         restrict: 'AE',
         replace: 'true',
         templateUrl: JiNGle.viewPath + 'FieldDirective.html',
+        transclude: true,
 
         scope: {
             id: '@',
@@ -159,7 +162,6 @@ angular.module('JiNGle.directives').directive('jifield', function($filter) {
             value: '=?',
             wrong: '=?',
             options: '=?',
-            configure: '=?',
             disabled: '=?',
             validation: '=?'
         },

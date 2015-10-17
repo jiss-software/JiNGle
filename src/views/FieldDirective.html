@@ -8,8 +8,7 @@
         <textarea id="{{id}}" name="{{name}}" class="form-control" ng-if="type == 'textarea'"
                   ng-disabled="disabled" ng-model="value">{{value}}</textarea>
 
-        <textarea id="{{id}}" name="{{name}}" class="form-control" ng-if="type == 'html'"
-                  ui-tinymce="configure" ng-disabled="disabled" ng-model="value">{{value}}</textarea>
+        <div ng-transclude ng-if="type == 'custom'" style="padding-top: 7px">&nbsp;</div>
 
         <select id="{{id}}" name="{{name}}" class="form-control"  ng-if="type === 'select'"
                 ng-model="value" ng-disabled="disabled">

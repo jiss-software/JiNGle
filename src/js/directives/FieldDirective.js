@@ -30,6 +30,7 @@ angular.module('JiNGle.directives').directive('jifield', function($filter) {
         restrict: 'AE',
         replace: 'true',
         templateUrl: JiNGle.viewPath + 'FieldDirective.html',
+        transclude: true,
 
         scope: {
             id: '@',
@@ -39,7 +40,6 @@ angular.module('JiNGle.directives').directive('jifield', function($filter) {
             value: '=?',
             wrong: '=?',
             options: '=?',
-            configure: '=?',
             disabled: '=?',
             validation: '=?'
         },
