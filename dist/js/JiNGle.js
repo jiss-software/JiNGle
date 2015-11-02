@@ -187,13 +187,6 @@ angular.module('JiNGle.directives').directive('jifield', function($filter) {
 
             $scope.type = ['select', 'textarea', 'html'].indexOf($scope.type) == -1 ? 'text' : $scope.type;
             $scope.fieldLength = ['textarea', 'html'].indexOf($scope.type) == -1 ? 8 : 5;
-
-            $scope.configure = $scope.configure || {
-                inline: false,
-                plugins : 'advlist autolink link lists charmap print preview',
-                skin: 'lightgray',
-                theme : 'modern'
-            };
         }
     };
 });;/**

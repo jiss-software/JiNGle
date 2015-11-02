@@ -1,6 +1,6 @@
 <div>
     <div class="row margin0 hidden-print">
-        <div class="col-lg-4 left padding0" ng-show="create">
+        <div class="col-lg-4 left padding0" ng-if="create">
             <div class="input-group">
                 <span class="input-group-btn">
                     <a ng-href="#/{{create}}/+" class="btn btn-success">
@@ -46,24 +46,24 @@
 
             <tr ng-repeat="item in data | filter: filtration | orderBy: sortRule">
                 <td ng-repeat="column in columns | filter: { hidden: false }">
-                    <span ng-hide="item[column.href]">{{item[column.field]}}</span>
-                    <a ng-show="item[column.href]" ng-href="{{item[column.href]}}">{{item[column.field]}}</a>
+                    <span ng-if="! item[column.href]">{{item[column.field]}}</span>
+                    <a ng-if="item[column.href]" ng-href="{{item[column.href]}}">{{item[column.field]}}</a>
                 </td>
 
                 <td class="hidden-print">
-                    <a ng-href="#/{{show}}/{{item.id}}" ng-show="show">
+                    <a ng-href="#/{{show}}/{{item.id}}" ng-if="show">
                         <i class="fa fa-eye"></i> {{'default.show.label' | i18n}}
                     </a>
 
-                    <a ng-href="/{{pdf}}/{{item.id}}" ng-show="pdf" target="_blank">
+                    <a ng-href="/{{pdf}}/{{item.id}}" ng-if="pdf" target="_blank">
                         <i class="fa fa-file-pdf-o"></i> {{'default.button.invoice.label' | i18n}}
                     </a>
 
-                    <a ng-href="#/{{edit}}/{{item.id}}" ng-show="edit">
+                    <a ng-href="#/{{edit}}/{{item.id}}" ng-if="edit">
                         <i class="fa fa-pencil-square-o"></i> {{'default.button.edit.label' | i18n}}
                     </a>
 
-                    <a ng-href="#/{{remove}}/{{item.id}}" ng-show="remove" class="delete">
+                    <a ng-href="#/{{remove}}/{{item.id}}" ng-if="remove" class="delete">
                         <i class="fa fa-trash-o"></i> {{'default.button.delete.label' | i18n}}
                     </a>
                 </td>

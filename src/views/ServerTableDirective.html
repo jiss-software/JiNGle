@@ -1,6 +1,6 @@
 <div>
     <div class="row margin0 hidden-print">
-        <div class="col-lg-4 left padding0" ng-show="create">
+        <div class="col-lg-4 left padding0" ng-if="create">
             <div class="input-group">
                 <span class="input-group-btn">
                     <a ng-href="#/{{create}}/+" class="btn btn-success">
@@ -27,7 +27,7 @@
     </div>
 
     <div class="row margin0 hidden-print form-horizontal" role="form"
-         ng-show="config" style="background-color: rgb(245, 245, 245); margin-top: 20px !important; padding-top: 15px; border-top: 2px solid rgb(221, 221, 221);">
+         ng-if="config" style="background-color: rgb(245, 245, 245); margin-top: 20px !important; padding-top: 15px; border-top: 2px solid rgb(221, 221, 221);">
 
         <form class="form-horizontal" role="form">
             <div class="form-group">
@@ -44,9 +44,9 @@
                 <label class="col-sm-2 control-label">{{column.name || (column.code | i18n)}}</label>
 
                 <div class="col-sm-5">
-                    <input ng-hide="collection.options[column.field]" class="form-control" type="text" size="40" />
+                    <input ng-if="! collection.options[column.field]" class="form-control" type="text" size="40" />
 
-                    <select ng-show="collection.options[column.field]" class="form-control">
+                    <select ng-if="collection.options[column.field]" class="form-control">
                         <option> - </option>
 
                         <option ng-repeat="option in collection.options[column.field]"
@@ -72,10 +72,10 @@
                 <th ng-repeat="column in columns | filter: { hidden: false }"
                     ng-init="tytle = column.name ? column.name : (column.code | i18n)">
 
-                    <span ng-show="! collection.meta[column.field].sortable">{{tytle}}</span>
+                    <span ng-if="! collection.meta[column.field].sortable">{{tytle}}</span>
 
                     <a ng-click="sortName(column.field)" class="clickable"
-                       ng-show="collection.meta[column.field].sortable">
+                       ng-if="collection.meta[column.field].sortable">
                         {{tytle}}
                     </a>
 
@@ -103,27 +103,27 @@
 
             <tr ng-show="ready" ng-repeat="item in collection.data">
                 <td ng-repeat="column in columns | filter: { hidden: false }">
-                    <span ng-hide="item[column.href]">{{cellFormat(item, column)}}</span>
+                    <span ng-if="! item[column.href]">{{cellFormat(item, column)}}</span>
 
-                    <a ng-show="item[column.href]" ng-href="{{item[column.href]}}">
+                    <a ng-if="item[column.href]" ng-href="{{item[column.href]}}">
                         {{cellFormat(item, column)}}
                     </a>
                 </td>
 
                 <td class="hidden-print">
-                    <a ng-href="#/{{show}}/{{item._id}}" ng-show="show">
+                    <a ng-href="#/{{show}}/{{item._id}}" ng-if="show">
                         <i class="fa fa-eye"></i> {{'action.show' | i18n}}
                     </a>
 
-                    <a ng-href="/{{pdf}}/{{item._id}}" ng-show="pdf" target="_blank">
+                    <a ng-href="/{{pdf}}/{{item._id}}" ng-if="pdf" target="_blank">
                         <i class="fa fa-file-pdf-o"></i> {{'action.print' | i18n}}
                     </a>
 
-                    <a ng-href="#/{{edit}}/{{item._id}}" ng-show="edit">
+                    <a ng-href="#/{{edit}}/{{item._id}}" ng-if="edit">
                         <i class="fa fa-pencil-square-o"></i> {{'action.edit' | i18n}}
                     </a>
 
-                    <a ng-href="#/{{remove}}/{{item._id}}" ng-show="remove" class="delete">
+                    <a ng-href="#/{{remove}}/{{item._id}}" ng-if="remove" class="delete">
                         <i class="fa fa-trash-o"></i> {{'action.delete' | i18n}}
                     </a>
                 </td>

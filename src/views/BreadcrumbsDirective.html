@@ -5,8 +5,8 @@
         </li>
 
         <li ng-class="{'active': ! isActive(node)}" ng-repeat="node in nodes">
-            <span ng-hide="isActive(node)">{{node.name || (node.code | i18n)}}</span>
-            <a href="#{{node.path}}" ng-show="isActive(node)">{{node.name || (node.code | i18n)}}</a>
+            <span ng-if="! isActive(node)">{{node.name || (node.code | i18n)}}</span>
+            <a href="#{{node.path}}" ng-if="isActive(node)">{{node.name || (node.code | i18n)}}</a>
         </li>
     </ol>
 
