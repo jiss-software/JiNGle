@@ -121,7 +121,13 @@ angular.module('JiNGle.directives').directive('jiservertable', function($http) {
             };
 
             $scope.cellFormat = function(row, column) {
-                return column.format ? column.format(row[column.field]) : row[column.field];
+                if (column.format) {
+                    if (column.field) return column.format(row[column.field]);
+
+                    return column.format(row);
+                }
+
+                return row[column.field];
             };
 
             $scope.asRow = function(value, field) {
