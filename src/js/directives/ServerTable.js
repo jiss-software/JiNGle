@@ -120,6 +120,16 @@ angular.module('JiNGle.directives').directive('jiservertable', function($http) {
                 load();
             };
 
+            $scope.cellStyle = function(row, column) {
+                if (column.style) {
+                    if (column.field) return column.style(row[column.field]);
+
+                    return column.style(row);
+                }
+
+                return {};
+            };
+
             $scope.cellFormat = function(row, column) {
                 if (column.format) {
                     if (column.field) return column.format(row[column.field]);
