@@ -37,8 +37,8 @@ angular.module('JiNGle.directives').directive('jifield', function($filter) {
             name: '@',
             label: '@',
             type: '@',
-            value: '=?',
-            wrong: '=?',
+            value: '=',
+            wrong: '=',
             options: '=?',
             disabled: '=?',
             validation: '=?'
