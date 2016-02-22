@@ -2,7 +2,7 @@
     <label for="{{id}}" class="col-sm-2 control-label">{{label}}</label>
 
     <div class="col-sm-{{fieldLength}}">
-        <input id="{{id}}" name="{{name}}" ng-model="value" ng-if="type == 'text'"
+        <input id="{{id}}" name="{{name}}" ng-model="value" ng-if="type == 'text' || type == 'checkbox'"
                type="{{type}}" class="form-control" ng-disabled="disabled" ng-class=""/>
 
         <textarea id="{{id}}" name="{{name}}" class="form-control" ng-if="type == 'textarea'"
