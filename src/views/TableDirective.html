@@ -4,7 +4,7 @@
             <div class="input-group">
                 <span class="input-group-btn">
                     <a ng-href="#/{{create}}/+" class="btn btn-success">
-                        <i class="fa fa-plus-square-o"></i> &nbsp; {{'default.button.create.label' | i18n}}
+                        <i class="fa fa-plus-square-o"></i> &nbsp; {{'action.create' | i18n}}
                     </a>
                 </span>
             </div>
@@ -41,7 +41,7 @@
 
         <tbody>
             <tr ng-hide="(data | filter: filtration).length">
-                <td colspan="999">{{'default.nodata.label' | i18n}}</td>
+                <td colspan="999">{{'label.no_data' | i18n}}</td>
             </tr>
 
             <tr ng-repeat="item in data | filter: filtration | orderBy: sortRule">
@@ -52,19 +52,19 @@
 
                 <td class="hidden-print">
                     <a ng-href="#/{{show}}/{{item.id}}" ng-if="show">
-                        <i class="fa fa-eye"></i> {{'default.show.label' | i18n}}
+                        <i class="fa fa-eye"></i> {{'action.show' | i18n}}
                     </a>
 
                     <a ng-href="/{{pdf}}/{{item.id}}" ng-if="pdf" target="_blank">
-                        <i class="fa fa-file-pdf-o"></i> {{'default.button.invoice.label' | i18n}}
+                        <i class="fa fa-file-pdf-o"></i> {{'action.print' | i18n}}
                     </a>
 
                     <a ng-href="#/{{edit}}/{{item.id}}" ng-if="edit">
-                        <i class="fa fa-pencil-square-o"></i> {{'default.button.edit.label' | i18n}}
+                        <i class="fa fa-pencil-square-o"></i> {{'action.edit' | i18n}}
                     </a>
 
                     <a ng-href="#/{{remove}}/{{item.id}}" ng-if="remove" class="delete">
-                        <i class="fa fa-trash-o"></i> {{'default.button.delete.label' | i18n}}
+                        <i class="fa fa-trash-o"></i> {{'action.delete' | i18n}}
                     </a>
                 </td>
             </tr>

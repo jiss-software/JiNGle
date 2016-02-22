@@ -64,8 +64,12 @@ angular.module('JiNGle.directives').directive('jiservertable', function($http) {
                 meta: {}
             };
 
-            $scope.isSortedAsc = function(field) { return $scope.collection.sortOrder[field] === 1; };
-            $scope.isSortedDesc = function(field) { return $scope.collection.sortOrder[field] === -1; };
+            $scope.isSortedAsc = function(field) { 
+                return $scope.collection.sortOrder && $scope.collection.sortOrder[field] === 1; 
+            };
+            $scope.isSortedDesc = function(field) { 
+                return $scope.collection.sortOrder && $scope.collection.sortOrder[field] === -1; 
+            };
 
             $scope.isFiltered = function(field) { return $scope.collection.filter[field]; };
 

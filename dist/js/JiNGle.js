@@ -18,8 +18,7 @@ var JiNGle = (function() {
 
 angular.module('JiNGle.directives', []);
 angular.module('JiNGle.filters', []);
-angular.module('JiNGle.interceptor', []);
-;window.notyData = {
+angular.module('JiNGle.interceptor', []);;window.notyData = {
     loadingQty: 0,
     loading: null
 };
@@ -159,8 +158,8 @@ angular.module('JiNGle.directives').directive('jifield', function($filter) {
             name: '@',
             label: '@',
             type: '@',
-            value: '=?',
-            wrong: '=?',
+            value: '=',
+            wrong: '=',
             options: '=?',
             disabled: '=?',
             validation: '=?'
@@ -189,7 +188,8 @@ angular.module('JiNGle.directives').directive('jifield', function($filter) {
             $scope.fieldLength = ['textarea', 'html'].indexOf($scope.type) == -1 ? 8 : 5;
         }
     };
-});;/**
+});
+;/**
  * Attributes:
  *  id - [Optional] identifier of item (can be generated randomly)
  *  disabled - [Optional] is input field disabled
@@ -291,8 +291,12 @@ angular.module('JiNGle.directives').directive('jiform', function() {
                 meta: {}
             };
 
-            $scope.isSortedAsc = function(field) { return $scope.collection.sortOrder[field] === 1; };
-            $scope.isSortedDesc = function(field) { return $scope.collection.sortOrder[field] === -1; };
+            $scope.isSortedAsc = function(field) { 
+                return $scope.collection.sortOrder && $scope.collection.sortOrder[field] === 1; 
+            };
+            $scope.isSortedDesc = function(field) { 
+                return $scope.collection.sortOrder && $scope.collection.sortOrder[field] === -1; 
+            };
 
             $scope.isFiltered = function(field) { return $scope.collection.filter[field]; };
 
@@ -345,6 +349,16 @@ angular.module('JiNGle.directives').directive('jiform', function() {
                 $scope.collection.skip = (page - 1) * $scope.settings.pageSize;
 
                 load();
+            };
+
+            $scope.cellStyle = function(row, column) {
+                if (column.style) {
+                    if (column.field) return column.style(row[column.field]);
+
+                    return column.style(row);
+                }
+
+                return {};
             };
 
             $scope.cellFormat = function(row, column) {
