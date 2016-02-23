@@ -353,9 +353,9 @@ angular.module('JiNGle.directives').directive('jiform', function() {
 
             $scope.cellStyle = function(row, column) {
                 if (column.style) {
-                    if (column.field) return column.style(row[column.field]);
+                    if (column.field) return column.style(row[column.field], column, row);
 
-                    return column.style(row);
+                    return column.style(row, column);
                 }
 
                 return {};
