@@ -3,6 +3,11 @@ JiNGle
 
 Utils for Angular projects
 
+Using
+-----
+
+All versions available on `https://cdn.jiss.ee/JiNGle/`
+
 Build
 -----
 Install grunt plugins:
