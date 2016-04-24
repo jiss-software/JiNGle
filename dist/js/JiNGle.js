@@ -241,6 +241,7 @@ angular.module('JiNGle.directives').directive('jiform', function() {
             show: '@show',
             pdf: '@pdf',
             edit: '@edit',
+            copy: '@copy',
             remove: '@delete'
         },
 

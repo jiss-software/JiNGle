@@ -14,6 +14,7 @@ angular.module('JiNGle.directives').directive('jiservertable', function($http) {
             show: '@show',
             pdf: '@pdf',
             edit: '@edit',
+            copy: '@copy',
             remove: '@delete'
         },
 
