@@ -19,3 +19,9 @@ var JiNGle = (function() {
 angular.module('JiNGle.directives', []);
 angular.module('JiNGle.filters', []);
 angular.module('JiNGle.interceptor', []);
+
+$(function () {
+    $("body").tooltip({
+        selector: '[data-toggle="tooltip"]'
+    });
+});
