@@ -52,12 +52,31 @@ module.exports = function(grunt) {
                     'dist/views/TableDirective.html': 'src/views/TableDirective.html'
                 }
             }
+        },
+
+        cssmin: {
+            options: {
+                shorthandCompacting: false,
+                roundingPrecision: -1
+            },
+            target: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'src/css',
+                        src: [ '*.css' ],
+                        dest: 'dist/css',
+                        ext: '.min.css'
+                    }
+                ]
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
 
-    grunt.registerTask('default', ['concat', 'uglify', 'htmlmin']);
+    grunt.registerTask('default', ['concat', 'uglify', 'htmlmin', 'cssmin']);
 };

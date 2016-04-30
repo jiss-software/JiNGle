@@ -1,4 +1,4 @@
-<div>
+<div data-table-role="container">
     <div class="row margin0 hidden-print">
         <div class="col-lg-4 left padding0" ng-if="create">
             <div class="input-group">
@@ -26,9 +26,7 @@
         </div>
     </div>
 
-    <div class="row margin0 hidden-print form-horizontal" role="form"
-         ng-if="config" style="background-color: rgb(245, 245, 245); margin-top: 20px !important; padding-top: 15px; border-top: 2px solid rgb(221, 221, 221);">
-
+    <div class="row margin0 hidden-print form-horizontal" role="form" ng-if="config" data-table-role="config">
         <form class="form-horizontal" role="form">
             <div class="form-group">
                 <label class="col-sm-2 control-label">{{'label.page_size' | i18n}}</label>
@@ -79,13 +77,13 @@
                         {{tytle}}
                     </a>
 
-                    <span>
-                        <i ng-show="isFiltered(column.field)" class="fa fa-filter" style="color: #999999;"></i>
+                    <span class="table-control">
+                        <i ng-show="isFiltered(column.field)" class="fa fa-filter"></i>
                     </span>
 
-                    <span style="display: inline-block; width: 20px;">
-                        <i ng-show="isSortedAsc(column.field)" class="fa fa-sort-asc" style="color: #999999;"></i>
-                        <i ng-show="isSortedDesc(column.field)" class="fa fa-sort-desc" style="color: #999999;"></i>
+                    <span style="display: inline-block; width: 20px;" class="table-control">
+                        <i ng-show="isSortedAsc(column.field)" class="fa fa-sort-asc"></i>
+                        <i ng-show="isSortedDesc(column.field)" class="fa fa-sort-desc"></i>
                     </span>
                 </th>
 
@@ -155,7 +153,7 @@
     <div class="row margin0 hidden-print">
         <div class="col-lg-10 padding0">
             <nav ng-hide="pageQuantity == 1">
-                <ul class="pagination" style="margin: 0">
+                <ul class="pagination">
                     <li ng-class="{ disabled: page == 1 }">
                         <a ng-click="goToPage(1)" class="clickable">&laquo;</a>
                     </li>
@@ -176,7 +174,7 @@
             </nav>
         </div>
 
-        <div class="col-lg-2 right" style="padding-right: 0; text-align: right;">
+        <div class="col-lg-2 right" data-table-role="info">
             <p>{{'label.table_info' | i18n: collection.selectionSize: collection.collectionSize }}</p>
         </div>
     </div>
