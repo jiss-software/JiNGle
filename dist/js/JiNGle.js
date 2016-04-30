@@ -273,6 +273,8 @@ angular.module('JiNGle.directives').directive('jiform', function() {
                     $scope.pageQuantity = Math.ceil(data.selectionSize / data.limit);
 
                     $scope.ready = true;
+
+                    $scope.settings.pageSize = data.limit;
                 });
             };
 

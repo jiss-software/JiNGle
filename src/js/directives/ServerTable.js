@@ -39,6 +39,8 @@ angular.module('JiNGle.directives').directive('jiservertable', function($http) {
                     $scope.pageQuantity = Math.ceil(data.selectionSize / data.limit);
 
                     $scope.ready = true;
+
+                    $scope.settings.pageSize = data.limit;
                 });
             };
 

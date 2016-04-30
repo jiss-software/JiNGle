@@ -32,9 +32,7 @@
                 <label class="col-sm-2 control-label">{{'label.page_size' | i18n}}</label>
 
                 <div class="col-sm-5">
-                    <select class="form-control" ng-model="settings.pageSize">
-                        <option ng-repeat="sizeOptions in sizes">{{sizeOptions}}</option>
-                    </select>
+                    <select class="form-control" ng-model="settings.pageSize" ng-options="size for size in sizes"></select>
                 </div>
             </div>
 
