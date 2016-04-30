@@ -266,6 +266,11 @@ angular.module('JiNGle.directives').directive('jiform', function() {
                     order: $scope.collection.sortOrder
                 };
 
+                Object.keys(selection.filter).forEach(function(k) {
+                    if (selection.filter[k]) selection.filter[k] = selection.filter[k].trim();
+                    if (! selection.filter[k]) selection.filter[k] = null;
+                });
+
                 $http.put(attrs.source, selection).success(function(data) {
                     $scope.collection = data;
 

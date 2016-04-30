@@ -32,6 +32,11 @@ angular.module('JiNGle.directives').directive('jiservertable', function($http) {
                     order: $scope.collection.sortOrder
                 };
 
+                Object.keys(selection.filter).forEach(function(k) {
+                    if (selection.filter[k]) selection.filter[k] = selection.filter[k].trim();
+                    if (! selection.filter[k]) selection.filter[k] = null;
+                });
+
                 $http.put(attrs.source, selection).success(function(data) {
                     $scope.collection = data;
 
