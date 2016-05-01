@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <div class="row margin0 hidden-print form-horizontal" role="form" ng-if="config" data-table-role="config">
+    <div class="row margin0 hidden-print form-horizontal" role="form" ng-show="config" data-table-role="config">
         <form class="form-horizontal" role="form">
             <div class="form-group">
                 <label class="col-sm-2 control-label">{{'label.page_size' | i18n}}</label>
@@ -40,17 +40,12 @@
                 <label class="col-sm-2 control-label">{{column.name || (column.code | i18n)}}</label>
 
                 <div class="col-sm-5">
-                    <input ng-if="! collection.options[column.field]" class="form-control"
+                    <input ng-if="collection.meta[column.field].type == 'text'" class="form-control"
                            ng-model="collection.filter[column.field]" type="text" size="40" />
 
-                    <select ng-if="collection.options[column.field]" class="form-control">
-                        <option> - </option>
-
-                        <option ng-repeat="option in collection.options[column.field]"
-                                value="{{option._id || option}}">
-
-                            {{cellFormat(asRow(option, column.field), column)}}
-                        </option>
+                    <select ng-if="collection.meta[column.field].type == 'options'" class="form-control"
+                            data-table-filter="options" ng-model="collection.filter[column.field]" multiple="multiple"
+                            ng-options="option.value as option.label for option in options[column.field]">
                     </select>
                 </div>
             </div>

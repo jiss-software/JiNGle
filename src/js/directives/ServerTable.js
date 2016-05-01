@@ -1,4 +1,4 @@
-angular.module('JiNGle.directives').directive('jiservertable', function($http) {
+angular.module('JiNGle.directives').directive('jiservertable', function($http, $timeout) {
     'use strict';
 
     return {
@@ -19,6 +19,8 @@ angular.module('JiNGle.directives').directive('jiservertable', function($http) {
         },
 
         link: function($scope, element, attrs) {
+            $scope.options = {};
+
             var load = function() {
                 $scope.ready = false;
                 
@@ -33,7 +35,7 @@ angular.module('JiNGle.directives').directive('jiservertable', function($http) {
                 };
 
                 Object.keys(selection.filter).forEach(function(k) {
-                    if (selection.filter[k]) selection.filter[k] = selection.filter[k].trim();
+                    if (selection.filter[k] && selection.filter[k].trim) selection.filter[k] = selection.filter[k].trim();
                     if (! selection.filter[k]) selection.filter[k] = null;
                 });
 
@@ -46,6 +48,25 @@ angular.module('JiNGle.directives').directive('jiservertable', function($http) {
                     $scope.ready = true;
 
                     $scope.settings.pageSize = data.limit;
+
+                    $timeout(function() {
+                        $('select[data-table-filter="options"]').multiselect();
+                    }, 1);
+
+                    Object.keys(data.options).forEach(function(key) {
+                        $scope.options[key] = [];
+
+                        var column = $scope.columns.find(function(item) {
+                            return item.field == key
+                        });
+
+                        data.options[key].forEach(function(option) {
+                            $scope.options[key].push({
+                                label: $scope.cellFormat($scope.asRow(option, key), column) || option,
+                                value: option.id || option._id || option
+                            });
+                        });
+                    });
                 });
             };
 
