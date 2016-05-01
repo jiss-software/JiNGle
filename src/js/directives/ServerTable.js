@@ -21,6 +21,24 @@ angular.module('JiNGle.directives').directive('jiservertable', function($http, $
         link: function($scope, element, attrs) {
             $scope.options = {};
 
+            $scope.datePicker = {
+                singleDatePicker: true,
+                showISOWeekNumbers: true,
+                locale: {
+                    format: 'DD.MM.YYYY'
+                }
+            };
+
+            $scope.dateTimePicker = {
+                autoApply: true,
+                timePicker: true,
+                singleDatePicker: true,
+                showISOWeekNumbers: true,
+                locale: {
+                    format: 'DD.MM.YYYY hh:mm'
+                }
+            };
+
             var load = function() {
                 $scope.ready = false;
                 
@@ -35,7 +53,9 @@ angular.module('JiNGle.directives').directive('jiservertable', function($http, $
                 };
 
                 Object.keys(selection.filter).forEach(function(k) {
-                    if (selection.filter[k] && selection.filter[k].trim) selection.filter[k] = selection.filter[k].trim();
+                    if (selection.filter[k] && selection.filter[k].trim) {
+                        selection.filter[k] = selection.filter[k].trim();
+                    }
                     if (! selection.filter[k]) selection.filter[k] = null;
                 });
 

@@ -39,7 +39,7 @@
             <div class="form-group" ng-repeat="column in columns">
                 <label class="col-sm-2 control-label">{{column.name || (column.code | i18n)}}</label>
 
-                <div class="col-sm-5">
+                <div class="col-sm-5" ng-if="['options', 'text'].indexOf(collection.meta[column.field].type) > -1">
                     <input ng-if="collection.meta[column.field].type == 'text'" class="form-control"
                            ng-model="collection.filter[column.field]" type="text" size="40" />
 
@@ -47,6 +47,32 @@
                             data-table-filter="options" ng-model="collection.filter[column.field]" multiple="multiple"
                             ng-options="option.value as option.label for option in options[column.field]">
                     </select>
+                </div>
+
+                <div ng-if="collection.meta[column.field].type == 'number'" >
+                    <div class="col-sm-2">
+                        <input class="form-control" ng-model="collection.filter[column.field].from"
+                               placeholder="from" type="text" size="10" />
+                    </div>
+
+                    <div class="col-sm-2">
+                        <input class="form-control" ng-model="collection.filter[column.field].to"
+                               placeholder="to" type="text" size="10" />
+                    </div>
+                </div>
+
+                <div ng-if="['date', 'dateTime'].indexOf(collection.meta[column.field].type) > -1 " >
+                    <div class="col-sm-2">
+                        <input class="form-control" ng-model="collection.filter[column.field].from"
+                               type="text" size="20" placeholder="from" date-range-picker
+                               options="collection.meta[column.field].type == 'date' ? datePicker : dateTimePicker" />
+                    </div>
+
+                    <div class="col-sm-2">
+                        <input class="form-control" ng-model="collection.filter[column.field].to"
+                               type="text" size="20" placeholder="to" date-range-picker
+                               options="collection.meta[column.field].type == 'date' ? datePicker : dateTimePicker" />
+                    </div>
                 </div>
             </div>
 
