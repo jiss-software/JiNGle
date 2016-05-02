@@ -1,6 +1,6 @@
 <div data-table-role="container">
     <div class="row margin0 hidden-print">
-        <div class="col-lg-4 left padding0" ng-if="create">
+        <div class="col-sm-2 padding0" ng-if="create">
             <div class="input-group">
                 <span class="input-group-btn">
                     <a ng-href="#/{{create}}/+" class="btn btn-success">
@@ -10,15 +10,28 @@
             </div>
         </div>
 
-        <div class="col-lg-4 right padding0">
+        <div class="col-sm-10 padding0 right">
             <div class="input-group">
-                <input type="text" name="table.search.query" ng-model="settings.query" class="form-control">
+                <input type="text" name="table.search.query" ng-model="settings.query" class="form-control"
+                       style="width: 200px; float: right;">
 
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" ng-click="startSearch()" name="table.search.query.start">{{'action.find' | i18n}}</button>
+                    <button class="btn btn-default" type="button" ng-click="startSearch()" name="table.search.query.start">
+                        {{'action.find' | i18n}}
+                    </button>
 
-                    <button class="btn btn-default" type="button" ng-click="config = !config" ng-init="config = false">
+                    <button class="btn btn-default" type="button" ng-if="enableConfig"ng-click="triggerPane('config')">
                         <i class="fa fa-wrench"></i>
+                        <span class="caret"></span>
+                    </button>
+
+                    <button class="btn btn-default" type="button" ng-if="enableFilter" ng-click="triggerPane('filter')">
+                        <i class="fa fa-filter"></i>
+                        <span class="caret"></span>
+                    </button>
+
+                    <button class="btn btn-default" type="button" ng-if="enableChart" ng-click="triggerPane('chart')">
+                        <i class="fa fa-bar-chart"></i>
                         <span class="caret"></span>
                     </button>
                 </span>
@@ -36,7 +49,19 @@
                 </div>
             </div>
 
-            <div class="form-group" ng-repeat="column in columns">
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button class="btn btn-default" ng-click="changeSettings()" type="button">
+                        {{'action.apply' | i18n}}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="row margin0 hidden-print form-horizontal" role="form" ng-show="filter" data-table-role="filter">
+        <form class="form-horizontal" role="form">
+            <div class="form-group" ng-repeat="column in columns" ng-if="collection.meta[column.field].type">
                 <label class="col-sm-2 control-label">{{column.name || (column.code | i18n)}}</label>
 
                 <div class="col-sm-5" ng-if="['options', 'text'].indexOf(collection.meta[column.field].type) > -1">
@@ -52,25 +77,42 @@
                 <div ng-if="collection.meta[column.field].type == 'number'" >
                     <div class="col-sm-2">
                         <input class="form-control" ng-model="collection.filter[column.field].from"
-                               placeholder="from" type="text" size="10" />
+                               placeholder="{{'label.from' | i18n}}" type="text" size="10" />
                     </div>
 
                     <div class="col-sm-2">
                         <input class="form-control" ng-model="collection.filter[column.field].to"
-                               placeholder="to" type="text" size="10" />
+                               placeholder="{{'label.to' | i18n}}" type="text" size="10" />
+                    </div>
+                </div>
+
+                <div ng-if="collection.meta[column.field].type == 'boolean'" style="padding-top: 5px;" >
+                    <div class="col-sm-1">
+                        <input ng-model="collection.filter[column.field]" type="radio" />
+                        {{'label.any' | i18n}}
+                    </div>
+
+                    <div class="col-sm-1">
+                        <input ng-model="collection.filter[column.field]" type="radio" value="true" />
+                        {{'label.true' | i18n}}
+                    </div>
+
+                    <div class="col-sm-1">
+                        <input ng-model="collection.filter[column.field]" type="radio" value="false" />
+                        {{'label.false' | i18n}}
                     </div>
                 </div>
 
                 <div ng-if="['date', 'dateTime'].indexOf(collection.meta[column.field].type) > -1 " >
                     <div class="col-sm-2">
                         <input class="form-control" ng-model="collection.filter[column.field].from"
-                               type="text" size="20" placeholder="from" date-range-picker
+                               type="text" size="20" placeholder="{{'label.from' | i18n}}" date-range-picker
                                options="collection.meta[column.field].type == 'date' ? datePicker : dateTimePicker" />
                     </div>
 
                     <div class="col-sm-2">
                         <input class="form-control" ng-model="collection.filter[column.field].to"
-                               type="text" size="20" placeholder="to" date-range-picker
+                               type="text" size="20" placeholder="{{'label.to' | i18n}}" date-range-picker
                                options="collection.meta[column.field].type == 'date' ? datePicker : dateTimePicker" />
                     </div>
                 </div>
@@ -78,10 +120,43 @@
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button class="btn btn-default" ng-click="changeSettings()" type="button">{{'action.find' | i18n}}</button>
+                    <button class="btn btn-default" ng-click="changeSettings()" type="button">
+                        {{'action.find' | i18n}}
+                    </button>
+
+                    <a ng-click="resetFilter()" class="btn btn-link cancel" style="cursor: pointer;">
+                        <i class="fa fa-times"></i> {{'action.cancel' | i18n}}
+                    </a>
                 </div>
             </div>
         </form>
+    </div>
+
+    <div class="row margin0 hidden-print form-horizontal" role="form" ng-show="chart" data-table-role="chart">
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{'label.page_size' | i18n}}</label>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button class="btn btn-default" ng-click="showChart()" type="button">
+                        {{'action.show' | i18n}}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="row" ng-if="quickFilters" style="margin-top: 15px; margin-bottom: 10px; font-size: 110%;">
+        <strong style="margin-right: 10px;">{{'label.filters' | i18n}}:</strong>
+        <a ng-click="applyQuickFilter(k)" ng-repeat="(k, v) in quickFilters" style="margin-right: 15px; cursor: pointer;">
+            {{k}}
+        </a>
+
+        <a ng-click="resetFilter()" class="cancel" style="cursor: pointer;">
+            <i class="fa fa-ban fa-fw" aria-hidden="true"></i>
+        </a>
     </div>
 
     <table class="table">
@@ -171,7 +246,7 @@
     </table>
 
     <div class="row margin0 hidden-print">
-        <div class="col-lg-10 padding0">
+        <div class="col-md-8 padding0">
             <nav ng-hide="pageQuantity == 1">
                 <ul class="pagination">
                     <li ng-class="{ disabled: page == 1 }">
@@ -194,8 +269,8 @@
             </nav>
         </div>
 
-        <div class="col-lg-2 right" data-table-role="info">
-            <p>{{'label.table_info' | i18n: collection.selectionSize: collection.collectionSize }}</p>
+        <div class="col-md-4" data-table-role="info">
+            <p class="right">{{'label.table_info' | i18n: collection.selectionSize: collection.collectionSize }}</p>
         </div>
     </div>
 </div>

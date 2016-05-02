@@ -1,4 +1,4 @@
-angular.module('JiNGle.directives').directive('jiservertable', function($http, $timeout) {
+angular.module('JiNGle.directives').directive('jiservertable', function($http, $timeout, $filter) {
     'use strict';
 
     return {
@@ -15,11 +15,33 @@ angular.module('JiNGle.directives').directive('jiservertable', function($http, $
             pdf: '@pdf',
             edit: '@edit',
             copy: '@copy',
-            remove: '@delete'
+            remove: '@delete',
+
+            enableConfig: '@',
+            enableFilter: '@',
+            enableChart: '@',
+
+            quickFilters: '='
         },
 
         link: function($scope, element, attrs) {
+            var i18nFilter = $filter('i18n');
+
             $scope.options = {};
+
+            $scope.config = false;
+            $scope.filter = false;
+            $scope.chart = false;
+
+            $scope.triggerPane = function(name) {
+                var state = !$scope[name];
+
+                $scope.config = false;
+                $scope.filter = false;
+                $scope.chart = false;
+
+                $scope[name] = state;
+            };
 
             $scope.datePicker = {
                 singleDatePicker: true,
@@ -70,7 +92,12 @@ angular.module('JiNGle.directives').directive('jiservertable', function($http, $
                     $scope.settings.pageSize = data.limit;
 
                     $timeout(function() {
-                        $('select[data-table-filter="options"]').multiselect();
+                        $('select[data-table-filter="options"]').multiselect({
+                            enableFiltering: true,
+                            nonSelectedText: i18nFilter('select.nonSelected'),
+                            allSelectedText: i18nFilter('select.allSelected'),
+                            nSelectedText: i18nFilter('select.nSelected')
+                        });
                     }, 1);
 
                     Object.keys(data.options).forEach(function(key) {
@@ -121,6 +148,19 @@ angular.module('JiNGle.directives').directive('jiservertable', function($http, $
             };
 
             $scope.isFiltered = function(field) { return $scope.collection.filter[field]; };
+
+            $scope.applyQuickFilter = function(key) {
+                Object.keys($scope.quickFilters[key]).forEach(function(k) {
+                    $scope.collection.filter[k] = $scope.quickFilters[key][k];
+                });
+
+                load();
+            };
+
+            $scope.resetFilter = function() {
+                $scope.collection.filter = {};
+                load();
+            };
 
             $scope.sortName = function(field) {
                 var rule = {};
