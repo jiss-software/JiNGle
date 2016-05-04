@@ -261,6 +261,8 @@ angular.module('JiNGle.directives').directive('jiform', function() {
         link: function($scope, element, attrs) {
             var i18nFilter = $filter('i18n');
 
+            var filtersInit = false;
+
             $scope.options = {};
 
             $scope.config = false;
@@ -325,14 +327,17 @@ angular.module('JiNGle.directives').directive('jiform', function() {
 
                     $scope.settings.pageSize = data.limit;
 
-                    $timeout(function() {
-                        $('select[data-table-filter="options"]').multiselect({
-                            enableFiltering: true,
-                            nonSelectedText: i18nFilter('select.nonSelected'),
-                            allSelectedText: i18nFilter('select.allSelected'),
-                            nSelectedText: i18nFilter('select.nSelected')
-                        });
-                    }, 1);
+                    if (! filtersInit) {
+                        filtersInit = true;
+                        $timeout(function() {
+                            $('select[data-table-filter="options"]').multiselect({
+                                enableFiltering: true,
+                                nonSelectedText: i18nFilter('select.nonSelected'),
+                                allSelectedText: i18nFilter('select.allSelected'),
+                                nSelectedText: i18nFilter('select.nSelected')
+                            });
+                        }, 1);
+                    }
 
                     Object.keys(data.options).forEach(function(key) {
                         $scope.options[key] = [];
@@ -348,6 +353,8 @@ angular.module('JiNGle.directives').directive('jiform', function() {
                             });
                         });
                     });
+
+                    $('select[data-table-filter="options"]').multiselect('refresh');
                 });
             };
 
@@ -384,6 +391,7 @@ angular.module('JiNGle.directives').directive('jiform', function() {
             $scope.isFiltered = function(field) { return $scope.collection.filter[field]; };
 
             $scope.applyQuickFilter = function(key) {
+                $scope.collection.filter = {};
                 Object.keys($scope.quickFilters[key]).forEach(function(k) {
                     $scope.collection.filter[k] = $scope.quickFilters[key][k];
                 });
