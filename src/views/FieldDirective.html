@@ -3,10 +3,10 @@
 
     <div class="col-sm-{{fieldLength}}">
         <input id="{{id}}" name="{{name}}" ng-model="$parent.ngModel" ng-if="type == 'text' || type == 'checkbox'"
-               type="{{type}}" class="form-control" ng-disabled="disabled" ng-class=""/>
+               type="{{type}}" class="form-control" ng-disabled="disabled" placeholder="{{label}}"/>
 
         <textarea id="{{id}}" name="{{name}}" class="form-control" ng-if="type == 'textarea'"
-                  ng-disabled="disabled" ng-model="$parent.ngModel"></textarea>
+                  ng-disabled="disabled" ng-model="$parent.ngModel" placeholder="{{label}}"></textarea>
 
         <div ng-transclude ng-if="type == 'custom'" style="padding-top: 7px">&nbsp;</div>
 
