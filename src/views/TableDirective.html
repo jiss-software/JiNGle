@@ -47,9 +47,9 @@
             </tr>
 
             <tr ng-repeat="item in data | filter: filtration | orderBy: sortRule">
-                <td ng-repeat="column in columns | filter: { hidden: false }">
-                    <span ng-if="! item[column.href]">{{item[column.field]}}</span>
-                    <a ng-if="item[column.href]" ng-href="{{item[column.href]}}">{{item[column.field]}}</a>
+                <td ng-repeat="column in columns | filter: { hidden: false }" ng-style="cellStyle(item, column)">
+                    <span ng-if="! item[column.href]">{{cellFormat(item, column)}}</span>
+                    <a ng-if="item[column.href]" ng-href="{{item[column.href]}}">{{cellFormat(item, column)}}</a>
                 </td>
 
                 <td class="hidden-print">

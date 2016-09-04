@@ -540,6 +540,26 @@ angular.module('JiNGle.directives').directive('jiform', function() {
                 $scope.sortRule.splice(index, 1);
                 $scope.sortRule.unshift('-' + field);
             };
+
+            $scope.cellStyle = function(row, column) {
+                if (column.style) {
+                    if (column.field) return column.style(row[column.field], column, row);
+
+                    return column.style(row, column);
+                }
+
+                return {};
+            };
+
+            $scope.cellFormat = function(row, column) {
+                if (column.format) {
+                    if (column.field) return column.format(row[column.field]);
+
+                    return column.format(row);
+                }
+
+                return row[column.field];
+            };
         }
     }
 });
