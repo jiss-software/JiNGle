@@ -70,6 +70,19 @@ module.exports = function(grunt) {
                     }
                 ]
             }
+        },
+
+        jsonmin: {
+            dev: {
+                options: {
+                    stripWhitespace: true,
+                    stripComments: true
+                },
+
+                files: {
+                    "dist/data/i18n-en.json" : "src/data/i18n-en.json"
+                }
+            }
         }
     });
 
@@ -77,6 +90,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-jsonmin');
 
-    grunt.registerTask('default', ['concat', 'uglify', 'htmlmin', 'cssmin']);
+    grunt.registerTask('default', ['concat', 'uglify', 'htmlmin', 'cssmin', 'jsonmin']);
 };

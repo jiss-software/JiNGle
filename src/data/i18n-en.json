@@ -1,0 +1,254 @@
+{
+  "springSecurity": {
+    "login": {
+      "header": "Please Login",
+      "button": "Login",
+      "password": {
+        "label": "Password"
+      },
+      "username": {
+        "label": "Username"
+      },
+      "remember": {
+        "me": {
+          "label": "Remember me"
+        }
+      },
+      "title": "Login"
+    },
+    "errors": {
+      "login": {
+        "disabled": "Sorry, your account is disabled.",
+        "locked": "Sorry, your account is locked.",
+        "passwordExpired": "Sorry, your password has expired.",
+        "expired": "Sorry, your account has expired.",
+        "fail": "Sorry, we were not able to find a user with that username and password."
+      }
+    },
+    "denied": {
+      "message": "Sorry, you're not authorized to view this page.",
+      "title": "Denied"
+    }
+  },
+  "action": {
+    "delete": "Delete",
+    "close": "Close",
+    "find": "Find",
+    "print": "Print",
+    "interrupt": "Interrupt",
+    "separate": "Separate",
+    "copy": "Copy",
+    "open": "Open",
+    "approve": "Approve",
+    "confirm": "Confirm",
+    "add": "Add",
+    "show": "Show",
+    "archive": "Archive",
+    "hide": "Hide",
+    "save": "Save",
+    "end": "End",
+    "schedule": "Schedule",
+    "start": "Start",
+    "apply": "Apply",
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "update": "Update",
+    "create": "Create",
+    "resend": "Resend",
+    "process": "Process",
+    "calculate": "calculate",
+    "rename": "Rename",
+    "convert": "Convert",
+    "edit": "Edit",
+    "cut": "Cut",
+    "move": "move",
+    "correct": "Correct",
+    "send": "Send",
+    "list": "List",
+    "change": "Change"
+  },
+  "label": {
+    "selected": "Selected {0} from {1}",
+    "context": "Company",
+    "any": "Any",
+    "from": "From",
+    "new": "New",
+    "search": "Search",
+    "to": "To",
+    "false": "No",
+    "filters": "Filters",
+    "type": "Type",
+    "list": "{0} List",
+    "true": "Yes",
+    "table_info": "Shown {0} from {1} records",
+    "page_size": "Page size",
+    "loading": "Loading...",
+    "required": "Required",
+    "no_data": "No data"
+  },
+  "shared": {
+    "language": {
+      "et": "Eesti",
+      "en": "English",
+      "current": "en",
+      "_": "Language",
+      "ru": "Русский"
+    },
+    "status": {
+      "loading": "Loading..."
+    },
+    "logout": "Logout",
+    "login": "Login"
+  },
+  "invoice": {
+    "stat": {
+      "late": "Late invoices",
+      "count": "Count",
+      "unpaid": "Not paid invoices",
+      "count_invoice": "Invoice count",
+      "sum_invoice": "Invoice summary",
+      "sum": "Summary"
+    },
+    "date": "Date",
+    "payment": {
+      "type": "Payment type",
+      "re_notified": "Re-notification done",
+      "date": "Payment date",
+      "re_notification": "Re-notification"
+    },
+    "item": {
+      "code": "Code",
+      "price": {
+        "and": {
+          "dis": "Pcs+Dis"
+        },
+        "per": {
+          "all": "Pr/all",
+          "pcs": "Pr/pcs"
+        }
+      },
+      "discount": "Dis",
+      "count": "Count",
+      "sum": "Total",
+      "name": "Name"
+    },
+    "status": {
+      "_": "Status",
+      "PAID": "Paid",
+      "PUBLISHED": "Published",
+      "DRAFT": "Compiled",
+      "CANCELED": "Canceled"
+    },
+    "update": "Update date",
+    "resend": "Resend",
+    "create": "Create date",
+    "filter": {
+      "not_sent": "Not sent",
+      "previous_month": "Previous month",
+      "current_month": "Current month",
+      "unpaid": "Unpaid",
+      "late": "Late"
+    },
+    "grand_total": "Grand total",
+    "tax_total": "Tax total",
+    "total": "Sum total",
+    "number": "Invoice nr",
+    "sending": "Sending",
+    "sent": "Sent",
+    "net_total": "Net total",
+    "comment": "Comment"
+  },
+  "articles": {
+    "description": "Description",
+    "color": "Color",
+    "discount": "Discount",
+    "stat": {
+      "amount": {
+        "other": "Other",
+        "mesure": "Sales amount",
+        "unit": "Product/Service",
+        "title": "Statistic of TOP {0} purchased items"
+      }
+    },
+    "name": "Name",
+    "count": "Count",
+    "price": "Price",
+    "stockQuantity": "Stock Quantity",
+    "code": "Code"
+  },
+  "supplier": {
+    "vat": "VAT",
+    "type": {
+      "business": "Business",
+      "_": "Type",
+      "private": "Private"
+    },
+    "name": "Name",
+    "email": "Email",
+    "tel": "Tel",
+    "note": "Note",
+    "address": "Address",
+    "recreate": "Do not change old invoices",
+    "regnr": "Reg.nr",
+    "single": "Supplier"
+  },
+  "client": {
+    "note": "Note",
+    "single": "Client",
+    "email": "Email",
+    "tel": "Tel",
+    "type": {
+      "business": "Business",
+      "_": "Type",
+      "private": "Private"
+    },
+    "regnr": "Reg.nr",
+    "discount": "Discount",
+    "cont": {
+      "person": "Contact person"
+    },
+    "address": "Address",
+    "vat": "VAT",
+    "name": "Name",
+    "recreate": "Do not change old invoices"
+  },
+  "tabs": {
+    "suppliers": "Suppliers",
+    "articles": "Services/Goods",
+    "clients": "Clients",
+    "invoices": "Invoices",
+    "users": "Users"
+  },
+  "clients": {
+    "stat": {
+      "amount": {
+        "unit": "Client",
+        "mesure": "Boughts amount",
+        "title": "Statistic of TOP {0} clients",
+        "other": "Other"
+      }
+    }
+  },
+  "table": {
+    "selected": "Selected {0} from {1}",
+    "info": "Show {0} from {1} entries",
+    "size": "Page size",
+    "search": "Search",
+    "loading": "Loading..."
+  },
+  "user": {
+    "realName": "Real name",
+    "email": "Email",
+    "password": "Password",
+    "role": "Role"
+  },
+  "question": {
+    "confirm": "Are you sure?"
+  },
+  "select": {
+    "nonSelected": "Non selected",
+    "allSelected": "All selected",
+    "nSelected": "- Selected"
+  },
+  "locale": "en"
+}
